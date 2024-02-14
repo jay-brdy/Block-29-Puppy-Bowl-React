@@ -3,6 +3,7 @@ import './App.css'
 import { getPlayers, getPlayer, createPlayer, deletePlayer} from "./API/index";
 import { Player } from "./components/SinglePlayer";
 import { PlayerDetails } from "./components/SinglePlayerDetails";
+import Form from "./components/NewPlayerForm";
 
 function App() {
   const [players, setPlayers] = useState([]);
@@ -28,18 +29,11 @@ function App() {
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const newPlayer = Object.fromEntries(formData.entries());
-
     createPlayer(newPlayer).then(() => {
       getPlayers().then((players) => {
         setPlayers(players);
       });
     });
-
-    // Clear form after submitted
-    event.target.reset();
   }
 
   function handleFilter(event) {
@@ -50,14 +44,11 @@ function App() {
     <div onClick={() => setPlayer({})}>
       <h1>Puppy Bowl</h1>
       <PlayerDetails player={player} />
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input type="text" name="name" />
-        <label htmlFor="breed">Breed:</label>
-        <input type="text" name="breed" />
-        <button type="submit">Add Player</button>
-      </form>
+      <Form onSubmit={handleSubmit} />
+
+      <label htmlFor="filter">Search: </label>
       <input type="text" name="filter" value={filter} onChange={handleFilter} />
+
       <table>
         <thead>
           <tr>
