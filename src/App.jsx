@@ -5,6 +5,7 @@ import { Player } from "./components/SinglePlayer";
 import { PlayerDetails } from "./components/SinglePlayerDetails";
 import Form from "./components/NewPlayerForm";
 import Filter from "./components/Filter";
+import AllPlayers from "./components/AllPlayers";
 
 function App() {
   const [players, setPlayers] = useState([]);
@@ -47,29 +48,7 @@ function App() {
       <PlayerDetails player={player} />
       <Form onSubmit={handleSubmit} />
       <Filter value={filter} onChange={handleFilter} />
-      
-
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Breed</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {players.map((player) => {
-            return (
-              <Player
-                key={player.id}
-                player={player}
-                onClick={handlePlayerClick}
-                onDelete={handlePlayerDelete}
-              />
-            );
-          })}
-        </tbody>
-      </table>
+      <AllPlayers players={players} onPlayerClick={handlePlayerClick} onPlayerDelete={handlePlayerDelete} />
     </div>
   );
 }
