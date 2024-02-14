@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { getPlayers, getPlayer, createPlayer, deletePlayer} from "./API/index";
-import { Player } from "./components/SinglePlayer";
-import { PlayerDetails } from "./components/SinglePlayerDetails";
+import PlayerDetails from "./components/PlayerDetails";
 import Form from "./components/NewPlayerForm";
 import Filter from "./components/Filter";
 import AllPlayers from "./components/AllPlayers";

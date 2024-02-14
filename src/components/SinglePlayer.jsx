@@ -1,3 +1,5 @@
+import React from "react";
+
 export function Player({ player, onClick, onDelete }) {
     return (
         <tr key={player.id}>
