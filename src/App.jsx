@@ -10,12 +10,23 @@ function App() {
   const [players, setPlayers] = useState([]);
   const [player, setPlayer] = useState({});
   const [filter, setFilter] = useState("");
+  const [filteredPlayers, setFilteredPlayers] = useState([]);
 
   useEffect (() => {
     getPlayers().then((players) => {
       setPlayers(players);
+      setFilteredPlayers(players);
     });
   }, []);
+
+  // Update filtered players whenever players or filter changes
+  useEffect (() => {
+    const filtered = players.filter((player) =>
+    player.name.toLowerCase().includes(filter.toLowerCase()) ||
+    player.breed.toLowerCase().includes(filter.toLowerCase())
+    );
+    setFilteredPlayers(filtered);
+  }, [players, filter]);
 
   function handlePlayerClick(playerId) {
     getPlayer(playerId).then(setPlayer);
@@ -50,7 +61,7 @@ function App() {
       <PlayerDetails player={player} />
       <Form onSubmit={handleSubmit} />
       <Filter value={filter} onChange={handleFilter} />
-      <AllPlayers players={players} onPlayerClick={handlePlayerClick} onPlayerDelete={handlePlayerDelete} />
+      <AllPlayers players={filteredPlayers} onPlayerClick={handlePlayerClick} onPlayerDelete={handlePlayerDelete} />
     </div>
   );
 }
