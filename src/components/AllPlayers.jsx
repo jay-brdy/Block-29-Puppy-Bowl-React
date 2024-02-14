@@ -17,8 +17,8 @@ function AllPlayers({ players, onPlayerClick, onPlayerDelete}) {
               <Player
                 key={player.id}
                 player={player}
-                onClick={handlePlayerClick}
-                onDelete={handlePlayerDelete}
+                onClick={onPlayerClick}
+                onDelete={onPlayerDelete}
               />
             );
           })}

@@ -11,3 +11,4 @@ export function Player({ player, onClick, onDelete }) {
     );
 }
 
+export default Player;
