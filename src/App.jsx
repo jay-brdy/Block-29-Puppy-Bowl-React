@@ -4,6 +4,7 @@ import { getPlayers, getPlayer, createPlayer, deletePlayer} from "./API/index";
 import { Player } from "./components/SinglePlayer";
 import { PlayerDetails } from "./components/SinglePlayerDetails";
 import Form from "./components/NewPlayerForm";
+import Filter from "./components/Filter";
 
 function App() {
   const [players, setPlayers] = useState([]);
@@ -45,9 +46,8 @@ function App() {
       <h1>Puppy Bowl</h1>
       <PlayerDetails player={player} />
       <Form onSubmit={handleSubmit} />
-
-      <label htmlFor="filter">Search: </label>
-      <input type="text" name="filter" value={filter} onChange={handleFilter} />
+      <Filter value={filter} onChange={handleFilter} />
+      
 
       <table>
         <thead>
