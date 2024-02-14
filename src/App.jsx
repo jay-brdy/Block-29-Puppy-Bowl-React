@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { getPlayers, getPlayer, createPlayer, deletePlayer} from "./API/index";
 import { Player } from "./components/SinglePlayer";
-import { PlayerDetails } from "./components/SinglePlayer";
+import { PlayerDetails } from "./components/SinglePlayerDetails";
 
 function App() {
   const [players, setPlayers] = useState([]);
