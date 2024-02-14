@@ -22,6 +22,7 @@ function App() {
     getPlayer(playerId).then(setPlayer);
   }
 
+  // Delete function
   function handlePlayerDelete(playerId) {
     deletePlayer(playerId).then(() => {
       getPlayers().then((players) => {
@@ -30,6 +31,7 @@ function App() {
     });
   }
 
+  // New Player Form Submitting
   function handleSubmit(event) {
     createPlayer(newPlayer).then(() => {
       getPlayers().then((players) => {
@@ -38,6 +40,7 @@ function App() {
     });
   }
 
+  // Filter function
   function handleFilter(event) {
     setFilter(event.target.value);
   }
