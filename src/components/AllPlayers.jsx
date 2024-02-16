@@ -6,8 +6,8 @@ function AllPlayers({ players, onPlayerClick, onPlayerDelete}) {
         <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Breed</th>
+            <th className="fixed-width-column">Name</th>
+            <th className="fixed-width-column">Breed</th>
             <th>Action</th>
           </tr>
         </thead>
