@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { getPlayers, getPlayer, createPlayer, deletePlayer} from "./API/index";
+import { getPlayers, getPlayer, createPlayer, deletePlayer } from "./API/index";
 import PlayerDetails from "./components/PlayerDetails";
 import Form from "./components/NewPlayerForm";
 import Filter from "./components/Filter";
@@ -12,18 +12,24 @@ function App() {
   const [filter, setFilter] = useState("");
   const [filteredPlayers, setFilteredPlayers] = useState([]);
 
-  useEffect (() => {
+  // Function to sort players by createdAt property in descending order
+  const sortPlayersByCreatedAt = (playersArray) => {
+    return playersArray.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  };
+
+  useEffect(() => {
     getPlayers().then((players) => {
-      setPlayers(players);
-      setFilteredPlayers(players);
+      const sortedPlayers = sortPlayersByCreatedAt(players);
+      setPlayers(sortedPlayers);
+      setFilteredPlayers(sortedPlayers);
     });
   }, []);
 
   // Update filtered players whenever players or filter changes
-  useEffect (() => {
+  useEffect(() => {
     const filtered = players.filter((player) =>
-    player.name.toLowerCase().includes(filter.toLowerCase()) ||
-    player.breed.toLowerCase().includes(filter.toLowerCase())
+      player.name.toLowerCase().includes(filter.toLowerCase()) ||
+      player.breed.toLowerCase().includes(filter.toLowerCase())
     );
     setFilteredPlayers(filtered);
   }, [players, filter]);
@@ -36,19 +42,21 @@ function App() {
   function handlePlayerDelete(playerId) {
     deletePlayer(playerId).then(() => {
       getPlayers().then((players) => {
-        setPlayers(players);
+        setPlayers(sortPlayersByCreatedAt(players));
       });
     });
   }
 
   // New Player Form Submitting
-  function handleSubmit(event) {
+  function handleSubmit(newPlayer) {
     createPlayer(newPlayer).then(() => {
       getPlayers().then((players) => {
-        setPlayers(players);
+        setPlayers(sortPlayersByCreatedAt(players));
       });
     });
   }
+
+
 
   // Filter function
   function handleFilter(event) {
