@@ -12,9 +12,9 @@ function Form({ onSubmit }) {
     return (
         <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name: </label>
-        <input type="text" name="name" />
+        <input type="text" name="name" required/>
         <label htmlFor="breed">Breed: </label>
-        <input type="text" name="breed" />
+        <input type="text" name="breed" required/>
         <button type="submit">Add Player</button>
       </form>
     )
